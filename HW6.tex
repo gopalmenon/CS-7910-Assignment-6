@@ -1,0 +1,97 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Short Sectioned Assignment
+% LaTeX Template
+% Version 1.0 (5/5/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[paper=a4, fontsize=11pt]{scrartcl} % A4 paper and 11pt font size
+
+\usepackage[T1]{fontenc} % Use 8-bit encoding that has 256 glyphs
+\usepackage{fourier} % Use the Adobe Utopia font for the document - comment this line to return to the LaTeX default
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+
+\usepackage{sectsty} % Allows customizing section commands
+\usepackage[top=5em]{geometry}
+\allsectionsfont{\centering \normalfont\scshape} % Make all sections centered, the default font and small caps
+
+\usepackage{fancyhdr} % Custom headers and footers
+\pagestyle{fancyplain} % Makes all pages in the document conform to the custom headers and footers
+\fancyhead{} % No page header - if you want one, create it in the same way as the footers below
+\fancyfoot[L]{} % Empty left footer
+\fancyfoot[C]{} % Empty center footer
+\fancyfoot[R]{\thepage} % Page numbering for right footer
+\renewcommand{\headrulewidth}{0pt} % Remove header underlines
+\renewcommand{\footrulewidth}{0pt} % Remove footer underlines
+\setlength{\headheight}{5pt} % Customize the height of the header
+
+\numberwithin{equation}{section} % Number equations within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{figure}{section} % Number figures within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+\numberwithin{table}{section} % Number tables within sections (i.e. 1.1, 1.2, 2.1, 2.2 instead of 1, 2, 3, 4)
+
+\setlength\parindent{0pt} % Removes all indentation from paragraphs - comment this line for an assignment with lots of text
+
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{gensymb}
+\usepackage{chngcntr}
+\usepackage{csquotes}
+\usepackage{flexisym}
+
+\counterwithout{figure}{section}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\newcommand{\horrule}[1]{\rule{\linewidth}{#1}} % Create horizontal rule command with 1 argument of height
+
+\title{	
+\normalfont \normalsize 
+\textsc{Utah State University, Computer Science Department} \\ [25pt] % Your university, school and/or department name(s)
+\horrule{0.5pt} \\[0.4cm] % Thin top horizontal rule
+\huge CS 7910 Computational Complexity\\Assignment 6 \\ % The assignment title
+\horrule{2pt} \\[0.5cm] % Thick bottom horizontal rule
+}
+
+\author{Gopal Menon} % Your name
+
+\date{\normalsize\today} % Today's date or a custom date
+
+\begin{document}
+
+\maketitle % Print the title
+
+\begin{enumerate}
+\item \textbf{(20 points)} In this exercise, we consider the \emph{Traveling Salesman Problem (TSP)}.
+Let G be a \textbf{complete directed graph}. Each directed edge $(v_i,v_j)$ has a weight $w(v_i,v_j)$. It is possible that $w(v_i,v_j) \neq w(v_j,v_i)$, i.e., the edge weights can be asymmetric.
+The optimization version of the TSP problem is to find a cycle $C$ in $G$ containing each vertex of $G$ exactly once such that the total weight of the edges of $C$ is minimized.
+The decision problem of TSP is as follows. Given a value $W$, decide whether $G$ has a cycle $C$ that contains each vertex of $G$ exactly once such that the total weight of the edges of $C$ is at most $W$.
+Prove that the decision problem of TSP is NP-Complete (Hint: by a reduction from the Hamiltonian Cycle problem).\\
+
+The Hamiltonian Cycle problem is known to be NP-Complete.
+
+\item This is a \enquote{warm-up} exercise on designing approximation algorithms.
+A variation of the \emph{knapsack problem} is defined as follows (actually it is the subset-sum problem): Given as input a knapsack of size $K$ and $n$ items whose sizes are $k_1, k_2, \ldots , k_n$, where $K$ and $k_1, k_2, \ldots , k_n$ are all positive real numbers, find a full \enquote{packing} of the knapsack (i.e., choose a subset of the $n$ items such that the total sum of the sizes of the items in the chosen subset is \emph{exactly} equal to $K$).
+We have proven that this problem is NP-complete, which implies that it is very likely that efficient algorithms (i.e., polynomial-time algorithms) for this problem do not exist. Thus, people tend to look for good \textbf{approximation algorithms} for solving this problem. In this exercise, we relax the constraint of the knapsack problem as follows. We still seek a packing of the knapsack, but we need not look for a \enquote{full} packing of the knapsack; instead, we look for a packing of the knapsack (i.e., a subset of the $n$ input items) such that the total sum of the sizes of the items in the chosen subset is at least $\frac{K}{2}$ (but no more than $K$). This is called a \emph{factor of} 2 \emph{approximation solution} for the knapsack problem. To simplify the problem, we assume that a factor of 2 approximation solution for the input always exists, i.e, there always exists a subset of items whose total size is at least $\frac{K}{2}$ and at most $K$.
+\begin{enumerate}\item \textbf{(20 points)} Design a \emph{polynomial-time} algorithm for computing a factor of 2 approximation solution, and analyze the running time of your algorithm (using the big-$O$ notation).\item \textbf{(5 points)} Improve your algorithm to $O(n)$ time. If your algorithm for part (a) already runs in $O(n)$ time, then you will get the five points automatically.
+\end{enumerate}\textbf{Note:} You are required to clearly describe the main idea of your algorithm. Although the pseudo-code is not required, you may also give the pseudo-code if you feel it is helpful for you to explain your algorithm. You also need to briefly explain why your algorithm works, i.e., why your algorithm can produce a factor of 2 approximation solution. Finally, please analyze the running time of your algorithm.
+
+\end{enumerate}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

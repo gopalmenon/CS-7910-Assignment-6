@@ -51,6 +51,9 @@
 \usepackage{chngcntr}
 \usepackage{csquotes}
 \usepackage{flexisym}
+\usepackage{algorithm,algpseudocode}
+
+\newcommand\Mycomb[2][n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
 
 \counterwithout{figure}{section}
 %----------------------------------------------------------------------------------------
@@ -89,7 +92,17 @@ The Hamiltonian Cycle problem is known to be NP-Complete. We can reduce the Hami
 \item creating an edge and assigning a weight of $\infty$ (infinity) to it between every node in $G\textprime$ that does not already have an edge
 \end{enumerate} 
 
-This reduction can clearly be done in polynomial time.
+This reduction can clearly be done in polynomial time based on the following analysis. The first two steps of the reduction shown above can be done in $O(W)$ time. In the last step, we need to create edges having a weight of $\infty$ between all the node pairs in $G\textprime$ that do not already have edges. This can be done in time:
+
+\begin{equation*}
+\begin{aligned}
+T &= \Mycomb[W-1]{2} -W\\
+&= \frac{(W-1)!}{(W-3)!2!} - W\\
+&= O(W^2)
+\end{aligned}
+\end{equation*}
+
+So the reduction can be done in $O(W^2)$ time.
 
 Given a certificate for the TSP problem, which will be an ordered list of edges, it is easy to verify in $O(N)$ time, where $N$ is the number of edges in certificate, or polynomial time, that the certificate is correct. This means that the TSP problem is in NP.
 
@@ -101,7 +114,37 @@ In the case where the instance of the TSP problem is true (there exists a cycle 
 A variation of the \emph{knapsack problem} is defined as follows (actually it is the subset-sum problem): Given as input a knapsack of size $K$ and $n$ items whose sizes are $k_1, k_2, \ldots , k_n$, where $K$ and $k_1, k_2, \ldots , k_n$ are all positive real numbers, find a full \enquote{packing} of the knapsack (i.e., choose a subset of the $n$ items such that the total sum of the sizes of the items in the chosen subset is \emph{exactly} equal to $K$).
 We have proven that this problem is NP-complete, which implies that it is very likely that efficient algorithms (i.e., polynomial-time algorithms) for this problem do not exist. Thus, people tend to look for good \textbf{approximation algorithms} for solving this problem. In this exercise, we relax the constraint of the knapsack problem as follows. We still seek a packing of the knapsack, but we need not look for a \enquote{full} packing of the knapsack; instead, we look for a packing of the knapsack (i.e., a subset of the $n$ input items) such that the total sum of the sizes of the items in the chosen subset is at least $\frac{K}{2}$ (but no more than $K$). This is called a \emph{factor of} 2 \emph{approximation solution} for the knapsack problem. To simplify the problem, we assume that a factor of 2 approximation solution for the input always exists, i.e, there always exists a subset of items whose total size is at least $\frac{K}{2}$ and at most $K$.
 \begin{enumerate}\item \textbf{(20 points)} Design a \emph{polynomial-time} algorithm for computing a factor of 2 approximation solution, and analyze the running time of your algorithm (using the big-$O$ notation).\item \textbf{(5 points)} Improve your algorithm to $O(n)$ time. If your algorithm for part (a) already runs in $O(n)$ time, then you will get the five points automatically.
-\end{enumerate}\textbf{Note:} You are required to clearly describe the main idea of your algorithm. Although the pseudo-code is not required, you may also give the pseudo-code if you feel it is helpful for you to explain your algorithm. You also need to briefly explain why your algorithm works, i.e., why your algorithm can produce a factor of 2 approximation solution. Finally, please analyze the running time of your algorithm.
+\end{enumerate}\textbf{Note:} You are required to clearly describe the main idea of your algorithm. Although the pseudo-code is not required, you may also give the pseudo-code if you feel it is helpful for you to explain your algorithm. You also need to briefly explain why your algorithm works, i.e., why your algorithm can produce a factor of 2 approximation solution. Finally, please analyze the running time of your algorithm.\\
+
+If a factor 2 approximation solution is guaranteed to exist, we can go through the set of $n$ items from beginning to end and do the following. If any item is of size $ > K$, then we discard it. Any item found to be of size $ \ge \frac{K}{2} \le K$, can be returned as the solution. Else we can keep accumulating the other items (having size $< \frac{K}{2}$) and return the collection of such items as the required solution as soon as the sum of the collection crosses $\frac{K}{2}$.
+
+The algorithm is shown in algorithm \ref{Fac2ApproxAlg} where it receives the set of items $I$ and the knapsack size $K$ as parameters.
+
+\begin{minipage}{\linewidth}
+  \begin{algorithm}[H]
+    \caption{Factor 2 Approximation Algorithm}\label{Fac2ApproxAlg}
+    \begin{algorithmic}[1]
+      \Procedure{Factor 2 Approximation Algorithm}{$I, K$}
+        \State create $array\_of\_items$ of size $I.length$
+        \State $array\_sum = 0$
+	\For{all $k_i$ in $I$}
+		\If {$k_i \ge \frac{K}{2} \le K$}
+		  \State return $k_i$
+		\ElsIf {$k_i< \frac{K}{2}$} 
+		  \State insert $k_i$ into $array\_of\_items$
+		  \State $array\_sum = array\_sum + k_i$
+		  \If {array_sum $\ge \frac{K}{2}$}
+		    \State return $array\_of\_items$
+		  \EndIf
+		\EndIf 
+	\EndFor
+	\State return $array\_of\_items$
+      \EndProcedure
+    \end{algorithmic}
+  \end{algorithm}
+\end{minipage}\\
+
+Since the factor 2 approximation algorithm is able to achieve its objective by going through all the items in one pass, the running time will be $O(n)$, where $n$ is the number of items.
 
 \end{enumerate}
 

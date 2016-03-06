@@ -116,9 +116,11 @@ In the case where the instance of the TSP problem is true (there exists a cycle 
 \begin{enumerate}\item \textbf{(20 points)} Design a \emph{polynomial-time} algorithm for computing a factor of 2 approximation solution, and analyze the running time of your algorithm (using the big-$O$ notation).\item \textbf{(5 points)} Improve your algorithm to $O(n)$ time. If your algorithm for part (a) already runs in $O(n)$ time, then you will get the five points automatically.
 \end{enumerate}\textbf{Note:} You are required to clearly describe the main idea of your algorithm. Although the pseudo-code is not required, you may also give the pseudo-code if you feel it is helpful for you to explain your algorithm. You also need to briefly explain why your algorithm works, i.e., why your algorithm can produce a factor of 2 approximation solution. Finally, please analyze the running time of your algorithm.\\
 
-If a factor 2 approximation solution is guaranteed to exist, we can go through the set of $n$ items from beginning to end and do the following. If any item is of size $ > K$, then we discard it. Any item found to be of size $ \ge \frac{K}{2} \le K$, can be returned as the solution. Else we can keep accumulating the other items (having size $< \frac{K}{2}$) and return the collection of such items as the required solution as soon as the sum of the collection crosses $\frac{K}{2}$.
+If a factor 2 approximation solution is guaranteed to exist, we can go through the set of $n$ items from beginning to end and do the following. If any item is of size $ > K$, then we discard it. Any item found to be of size $ \ge \frac{K}{2} \le K$, can be returned as the solution. Else we can keep accumulating the other items (having size $< \frac{K}{2}$) and return the collection of such items as the required solution as soon as the sum of the collection crosses $\frac{K}{2}$. 
 
-The algorithm is shown in algorithm \ref{Fac2ApproxAlg} where it receives the set of items $I$ and the knapsack size $K$ as parameters.
+The reason this will work for the part where the items smaller than $\frac{K}{2}$ are accumulated is that, it is not possible to add an element of size $< \frac{K}{2}$ to the items being accumulated and have the total size exceed $K$. Consider the case where the total size is almost $\frac{K}{2}$. The largest item we can add to it can have a size that is almost $\frac{K}{2}$, but will have to be $< \frac{K}{2}$. By adding this item, the total size will be almost $K$, but will still be $< K$. And as soon as the total size crosses $\frac{K}{2}$, we will terminate the process.
+
+The algorithm is shown in Algorithm listing \ref{Fac2ApproxAlg} where it receives the set of items $I$ and the knapsack size $K$ as parameters.
 
 \begin{minipage}{\linewidth}
   \begin{algorithm}[H]
@@ -138,7 +140,6 @@ The algorithm is shown in algorithm \ref{Fac2ApproxAlg} where it receives the se
 		  \EndIf
 		\EndIf 
 	\EndFor
-	\State return $array\_of\_items$
       \EndProcedure
     \end{algorithmic}
   \end{algorithm}

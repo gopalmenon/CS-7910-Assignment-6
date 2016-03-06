@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  6 MAR 2016 14:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  6 MAR 2016 15:27
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -968,25 +968,25 @@ Underfull \hbox (badness 10000) in paragraph at lines 126--127
  []
 
 [2]
-Underfull \hbox (badness 10000) in paragraph at lines 132--155
+Underfull \hbox (badness 10000) in paragraph at lines 134--156
 
  []
 
 [3] (./HW6.aux) ) 
 Here is how much of TeX's memory you used:
- 14022 strings out of 493089
- 240885 string characters out of 6134842
+ 14021 strings out of 493089
+ 240863 string characters out of 6134842
  353274 words of memory out of 5000000
- 17288 multiletter control sequences out of 15000+600000
+ 17287 multiletter control sequences out of 15000+600000
  83508 words of font info for 103 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 63i,11n,50p,10390b,460s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 63i,11n,50p,10390b,459s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.en
 c}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/fourier/fourier-ms.pfb
 ></usr/local/texlive/2015/texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/
 local/texlive/2015/texmf-dist/fonts/type1/adobe/utopia/putr8a.pfb></usr/local/t
 exlive/2015/texmf-dist/fonts/type1/adobe/utopia/putri8a.pfb>
-Output written on HW6.pdf (3 pages, 62005 bytes).
+Output written on HW6.pdf (3 pages, 62937 bytes).
 PDF statistics:
  31 PDF objects out of 1000 (max. 8388607)
  21 compressed objects within 1 object stream
